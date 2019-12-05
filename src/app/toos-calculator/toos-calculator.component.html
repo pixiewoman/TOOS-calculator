@@ -1,25 +1,42 @@
 
-<div class="container">
-<form [formGroup]="form">
-  <div class="form-group">
-    <label for ="location">Location</label>
+
+ 
+  <div class="card" style ="margin : 0 auto; width : 60%; margin-top : 20px;">
+    
+    <div class="card-header">CO2 KALKULATOR</div>
+    <div class="card-body ">
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)"  >
+  <div class="form-group" >
+    <label for ="location">Lokacija</label>
     <input 
     formControlName = "location"    
     id = "location"
     type ="text"
     class ="form-control"
     >
-    <div *ngIf ="location.touched && location.invalid"class="alert alert-danger">Location is required</div>
+  </div>
+
+    
+  <div class="form-group">
+    <label for ="equipment">Vrsta rashladne opreme</label>
+    <input style ="width : 50%"
+    formControlName = "equipment"    
+    id = "equipment"
+    type ="text"
+    class ="form-control"
+    >
   </div>
   <div class="form-group">
-    <label for = "refrigerant">Refrigerant</label>
-    <select formControlName="refrigerant">
-      <option *ngFor ="let refrigerant of refrigerants"  value="{{refrigerant.value}}">{{refrigerant.name}}</option>
+    <label for = "refrigerant">Rashladno sredstvo</label> 
+       <select formControlName="refrigerant" (change)="selectChange($event)">
+      <option *ngFor ="let refrigerant of refrigerants"  value="{{refrigerant.GWP}}">{{refrigerant.name}}</option>
       
     </select>
+    
+    <button type ="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style =" margin-left:10px">Info</button>
   </div>
-  <div class="form-group">
-    <label for ="weight">weight (kg)</label>
+  <div class="form-group form-inline ">
+    <label for ="weight">masa (kg)</label>
     <input 
     formControlName = "weight"
     id = "weight"
@@ -27,19 +44,84 @@
     class ="form-control"
     >
   </div>
-  <div class="form-group">
-    <label for ="equivalent">CO2 ekvivalent</label>
-    <input 
-    formControlName = "equivalent"    
-    id = "equivalent"
-    type ="text"
-    class ="form-control"
-    value="{{calculation}}"
-    
-    >
+  <hr >
+    <div class="form-inline">
+    <h4>=</h4>
+    <h4>{{calculation | number :'0.3' }}</h4>
+    <h4> t CO2 ekv </h4>
+  
   </div>
-  
-  
-  <button class="btn btn-success" (click)="t()" >Calculate</button>
+  <hr>
+  <button type ="button" class="btn btn-success" (click)="calculate()" >Izračunaj</button>
+  <button type = "submit" class="btn btn-primary">Dodaj u tablicu</button>
 </form>
+
+</div>
+  </div>
+
+ 
+
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{name}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover" style = " width : 80%; margin : 0 auto">
+  <thead>
+    <tr>
+      <th scope="col">Lokacija</th>
+      <th scope="col">Vrsta opreme</th>
+      <th scope="col">Rashladno sredstvo</th>
+      <th scope="col">Masa</th>
+      <th scope="col">CO2 ekvivalent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let item of tablica; let i = index" >
+      
+      <td>{{item.location}}</td>
+      <td>{{item.equipment}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.weight}}</td>
+      <td>{{item.refrigerant*item.weight}}</td>
+      <button type ="button"class="btn btn-sm btn-danger " style = "margin-top: 10px;" (click)="onDelete()">Delete</button>
+    </tr>
+    <tr>
+      
+              
+    
+  </tbody>
+</table> 
+
+
+
+  
+
+
+
+
+
+
+
+
 

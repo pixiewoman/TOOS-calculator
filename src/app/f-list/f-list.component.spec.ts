@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToosCalculatorComponent } from './toos-calculator.component';
+import { FListComponent } from './f-list.component';
 
-describe('ToosCalculatorComponent', () => {
-  let component: ToosCalculatorComponent;
-  let fixture: ComponentFixture<ToosCalculatorComponent>;
+describe('FListComponent', () => {
+  let component: FListComponent;
+  let fixture: ComponentFixture<FListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToosCalculatorComponent ]
+      declarations: [ FListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToosCalculatorComponent);
+    fixture = TestBed.createComponent(FListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

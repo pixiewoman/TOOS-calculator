@@ -1,0 +1,20 @@
+input {
+width: 300px;
+}
+
+.form-inline h4{
+    margin-right:5px;
+    margin-left: 10px;
+  }
+  #ekvivalent {
+    height: 35px; 
+    width : 100px; 
+    background-color: white;
+    border: 1px solid grey; 
+    border-radius : 5px;
+
+  }
+  label {
+      margin-right : 10px;
+  }
+  
